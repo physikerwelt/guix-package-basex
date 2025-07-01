@@ -102,3 +102,8 @@ INFO] Reactor Summary for BaseX 12.0:
 [ERROR] 
 [ERROR
 ```
+There is no jdk
+```
+ javac -v
+-bash: javac: command not found
+```
