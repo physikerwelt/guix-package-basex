@@ -107,3 +107,18 @@ There is no jdk
  javac -v
 -bash: javac: command not found
 ```
+This can be solved by running `guix package -i openjdk@17:jdk` with that one can build basex
+```
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for BaseX 12.0:
+[INFO] 
+[INFO] BaseX .............................................. SUCCESS [  0.001 s]
+[INFO] BaseX Core ......................................... SUCCESS [ 14.649 s]
+[INFO] BaseX API .......................................... SUCCESS [  0.669 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.432 s
+[INFO] Finished at: 2025-07-01T12:49:42-07:00
+[INFO] ------------------------------------------------------------------------
+```
