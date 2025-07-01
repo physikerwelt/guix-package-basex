@@ -42,3 +42,13 @@ debian@debian:~/basex$ mvn compile -DskipTests
 [INFO] Finished at: 2025-07-01T06:55:41-07:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+Here the exact versions are
+```
+debian@debian:~/basex$ mvn --version
+Apache Maven 3.8.7
+Maven home: /usr/share/maven
+Java version: 17.0.15, vendor: Debian, runtime: /usr/lib/jvm/java-17-openjdk-arm64
+Default locale: en_US, platform encoding: ANSI_X3.4-1968
+OS name: "linux", version: "6.1.0-35-arm64", arch: "aarch64", family: "unix"`
+```
