@@ -52,3 +52,31 @@ Java version: 17.0.15, vendor: Debian, runtime: /usr/lib/jvm/java-17-openjdk-arm
 Default locale: en_US, platform encoding: ANSI_X3.4-1968
 OS name: "linux", version: "6.1.0-35-arm64", arch: "aarch64", family: "unix"`
 ```
+Try again
+```
+sudo apt-get remove maven openjdk-17-jdk
+debian@debian:~/basex$ guix install openjdk@17 maven
+hint: Consider installing the `glibc-locales' package and defining `GUIX_LOCPATH', along these lines:
+
+     guix install glibc-locales
+     export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+
+See the "Application Setup" section in the manual, for more info.
+
+The following packages will be installed:
+   maven   3.9.0
+   openjdk 17.0.10
+
+debian@debian:~/basex$ mvn --version
+Apache Maven 3.9.0 (guix_build)
+Maven home: /gnu/store/0wzwx9fir0pb5w2x1kmpvjyfkv0c7kgm-maven-3.9.0
+Java version: 17.0.10, vendor: N/A, runtime: /gnu/store/59wy373xv8hi4fq4m3qqwrfm91fkqs8f-openjdk-17.0.10
+Default locale: en_US, platform encoding: ANSI_X3.4-1968
+OS name: "linux", version: "6.1.0-35-arm64", arch: "aarch64", family: "unix"
+debian@debian:~/basex$ mvn compile -DskipTests
+[ERROR] Error executing Maven.
+[ERROR] java.lang.IllegalStateException: Unable to load cache item
+[ERROR] Caused by: Unable to load cache item
+[ERROR] Caused by: Could not initialize class net.sf.cglib.core.MethodWrapper
+[ERROR] Caused by: Exception net.sf.cglib.core.CodeGenerationException: java.lang.reflect.InaccessibleObjectException-->Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module @57536d79 [in thread "main"]
+```
