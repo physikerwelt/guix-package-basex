@@ -80,3 +80,25 @@ debian@debian:~/basex$ mvn compile -DskipTests
 [ERROR] Caused by: Could not initialize class net.sf.cglib.core.MethodWrapper
 [ERROR] Caused by: Exception net.sf.cglib.core.CodeGenerationException: java.lang.reflect.InaccessibleObjectException-->Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module @57536d79 [in thread "main"]
 ```
+fixing that via
+```
+export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
+```
+reveals that openjdk is a jre not a jdk
+```
+INFO] Reactor Summary for BaseX 12.0:
+[INFO] 
+[INFO] BaseX .............................................. SUCCESS [  0.001 s]
+[INFO] BaseX Core ......................................... FAILURE [  0.471 s]
+[INFO] BaseX API .......................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.584 s
+[INFO] Finished at: 2025-07-01T07:05:13-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project basex: Compilation failure
+[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+[ERROR] 
+[ERROR
+```
