@@ -18,3 +18,5 @@ jobs:
         uses: PromyLOPh/guix-install-action@v1
       - name: Ensure no locale warning
         run: test -z "$(guix --version 2>&1 >/dev/null)"
+      - name: Install build tools
+        run: guix install openjdk@17:jdk maven
