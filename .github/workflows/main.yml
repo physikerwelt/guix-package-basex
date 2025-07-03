@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Guix cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/guix
           # use a key that (almost) never matches
@@ -20,3 +20,7 @@ jobs:
         run: test -z "$(guix --version 2>&1 >/dev/null)"
       - name: Install build tools
         run: guix install openjdk@17:jdk maven
+      - uses: actions/checkout@v4
+        with:
+          repository: 'https://github.com/BaseXdb/basex.git'
+          ref: '12.0'
