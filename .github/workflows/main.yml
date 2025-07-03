@@ -8,7 +8,9 @@ jobs:
       - name: Guix cache
         uses: actions/cache@v4
         with:
-          path: ~/.cache/guix
+          path: |
+            ~/.cache/guix
+            /var/cache/guix/
           # use a key that (almost) never matches
           key: guix-cache-${{ github.sha }}
           restore-keys: |
@@ -24,3 +26,10 @@ jobs:
         with:
           repository: 'BaseXdb/basex'
           ref: '12.0'
+      - name: maven
+        shell: bash
+        run: mvn compile && mvn package && mvn install
+        env: 
+          MAVEN_OPTS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+
+          
