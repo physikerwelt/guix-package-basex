@@ -122,3 +122,67 @@ This can be solved by running `guix package -i openjdk@17:jdk` with that one can
 [INFO] Finished at: 2025-07-01T12:49:42-07:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+## 2025-07-03
+
+Add minimal docker file (without guix)
+```
+$ ./getBasex.sh                              
+--2025-07-04 02:02:52--  https://files.basex.org/releases/12.0/BaseX120.zip
+Resolving files.basex.org (files.basex.org)... 185.221.106.187
+Connecting to files.basex.org (files.basex.org)|185.221.106.187|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 11996806 (11M) [application/zip]
+Saving to: ‘BaseX120.zip.1’
+
+BaseX120.zip.1                                  100%[=====================================================================================================>]  11.44M  17.0MB/s    in 0.7s    
+
+2025-07-04 02:02:53 (17.0 MB/s) - ‘BaseX120.zip.1’ saved [11996806/11996806]
+
+Archive:  BaseX120.zip
+replace basex/.basexhome? [y]es, [n]o, [A]ll, [N]one, [r]ename: A
+ extracting: basex/.basexhome   
+...
+  inflating: basex/webapp/WEB-INF/web.xml  
+$docker build . -t basex                   
+[+] Building 0.9s (8/8) FINISHED                                                                                                                                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                     0.0s
+ => => transferring dockerfile: 191B                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/eclipse-temurin:21                                                                                                                    0.8s
+ => [internal] load .dockerignore                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                          0.0s
+ => [1/3] FROM docker.io/library/eclipse-temurin:21@sha256:1c37779fe2f338d42a7bc8ac439920ef2bf7cebb7deb0970f5733219b17e9868                                                              0.0s
+ => => resolve docker.io/library/eclipse-temurin:21@sha256:1c37779fe2f338d42a7bc8ac439920ef2bf7cebb7deb0970f5733219b17e9868                                                              0.0s
+ => [internal] load build context                                                                                                                                                        0.0s
+ => => transferring context: 8.68kB                                                                                                                                                      0.0s
+ => CACHED [2/3] WORKDIR /basex                                                                                                                                                          0.0s
+ => CACHED [3/3] COPY ./basex /basex                                                                                                                                                     0.0s
+ => exporting to image                                                                                                                                                                   0.0s
+ => => exporting layers                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:2bee8d98d531a278eeb78970c4320ea0141b864cb4b5e3214abb951dbe4a5a25                                                                                        0.0s
+ => => exporting config sha256:87dae0f78570d6cb696cfc63b141b7a56380551ea6011d8027376ccf67f93d9a                                                                                          0.0s
+ => => exporting attestation manifest sha256:279eeefc0f6b7217ae631a1d01c77b13f0a624b1d204756990d918a96056065f                                                                            0.0s
+ => => exporting manifest list sha256:5bfdbbf8afb26e7342336e028aeccce3ff276540c2ff0b8961273a0a39d3b8a8                                                                                   0.0s
+ => => naming to docker.io/library/basex:latest                                                                                                                                          0.0s
+ => => unpacking to docker.io/library/basex:latest                                                                                                                                       0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/1oogcscxdpamiwikzrcnks9xb
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+$ docker run -p 8080:8080 -it basex  
+/basex/.basex: writing new configuration file.
+BaseX 12.0 [HTTP Server]
+[main] INFO org.eclipse.jetty.server.Server - jetty-12.0.22; built: 2025-06-02T15:25:31.946Z; git: 335c9ab44a5591f0ea941bf350e139b8c4f5537c; jvm 21.0.7+6-LTS
+[main] INFO org.eclipse.jetty.ee9.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.ee9.jsp.JettyJspServlet
+[main] INFO org.eclipse.jetty.session.DefaultSessionIdManager - Session workerName=node0
+Server was started (port: 1984).
+[main] INFO org.eclipse.jetty.server.handler.ContextHandler - Started oeje9n.ContextHandler$CoreContextHandler@2c4d1ac{BaseX: The XML Database and XQuery Processor,/,b=file:///basex/webapp/,a=AVAILABLE,h=oeje9n.ContextHandler$CoreContextHandler$CoreToNestedHandler@7f0d96f2{STARTED}}
+[main] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@6b88ca8c{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+[main] INFO org.eclipse.jetty.server.Server - Started oejs.Server@9d5509a{STARTING}[12.0.22,sto=0] @441ms
+HTTP STOP Server was started (port: 8081).
+HTTP Server was started (port: 8080).
+Password: 
+
+```
+enter password
