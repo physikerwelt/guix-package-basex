@@ -186,3 +186,5 @@ Password:
 
 ```
 enter password
+
+pass password via  `docker run -p 8080:8080 -e basexpassword=admin basex`
